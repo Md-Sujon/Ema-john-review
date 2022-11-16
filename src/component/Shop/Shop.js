@@ -1,4 +1,6 @@
+import { findAllByAltText } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
+import { addToDb, getStroedCart } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
 import './Shop.css';
@@ -14,10 +16,20 @@ const Shop = () => {
         .then(data=>setProducts(data))
     },[])
 
+    useEffect(()=>{
+      const stroedCart = getStroedCart();
+      for (const id in stroedCart){
+       const AddedProduct =products.filter(product => product.id ===  id)
+       console.log(AddedProduct);
+      }
+      
+    },[products])
+
 
     const handleCart = (product) =>{
         const newCart = [...cart,product];
         setCart(newCart);
+        addToDb(product.id)
     }
 
 
