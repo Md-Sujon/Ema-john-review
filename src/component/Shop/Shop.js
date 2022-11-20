@@ -25,7 +25,7 @@ const Shop = () => {
       
     },[products])
 
-
+//Handel cart
     const handleCart = (product) =>{
         const newCart = [...cart,product];
         setCart(newCart);
