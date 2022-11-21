@@ -16,14 +16,21 @@ const Shop = () => {
         .then(data=>setProducts(data))
     },[])
 
-    useEffect(()=>{
-      const stroedCart = getStroedCart();
-      for (const id in stroedCart){
-       const AddedProduct =products.filter(product => product.id ===  id)
-       console.log(AddedProduct);
-      }
-      
+    useEffect(() =>{
+      const storedCart = getStroedCart()
+      const saveCart = [];
+       for(const id in storedCart){
+        const addedProduct = products.find(product => product.id === id);
+         if(addedProduct){
+          const quantity = storedCart[id]
+          addedProduct.quantity = quantity;
+          saveCart.push(addedProduct); 
+         }
+        
+       }
+    setCart(saveCart)
     },[products])
+    
 
 //Handel cart
     const handleCart = (product) =>{
@@ -35,7 +42,6 @@ const Shop = () => {
 
   return (
     <div className="shop-container">
-
       <div className="product-container">
        {
         products.map((product) =><Product 
@@ -50,7 +56,6 @@ const Shop = () => {
         <h3>Order Summary</h3>
         <Cart cart={cart}></Cart>
       </div>
-
     </div>
   );
 };

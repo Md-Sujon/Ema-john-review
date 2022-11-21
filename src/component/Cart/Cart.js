@@ -3,6 +3,7 @@ import './Cart.css';
 
 const Cart = (props) => {
     const {cart} = props;
+    console.log(cart);
    
 
  let total = 0;
@@ -15,8 +16,8 @@ for(const products of cart){
    shipping = shipping+products.shipping;
  
 }
-let taxCalculate = (total * 0.1).toFixed(2);
-let GrandTotal = total+shipping+parseFloat(taxCalculate);
+let taxCalculate = parseFloat((total * 0.1).toFixed(2));
+let GrandTotal = total+shipping+taxCalculate;
     return (
         <div>
             <p>quantity: {cart.length}</p>
